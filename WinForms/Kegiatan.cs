@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinForms
 {
-    class Kehadiran
+    class Kegiatan
     {
         private int _id;
         private string _nama;
