@@ -36,12 +36,12 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.dtpJamDatang = new System.Windows.Forms.DateTimePicker();
             this.dtpJamPulang = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvKehadiran = new System.Windows.Forms.DataGridView();
             this.btnAbsen = new System.Windows.Forms.Button();
             this.txtNPA2 = new System.Windows.Forms.TextBox();
             this.btnAddKegiatan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataAnggota)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKehadiran)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNama
@@ -67,6 +67,7 @@
             this.dgvDataAnggota.Name = "dgvDataAnggota";
             this.dgvDataAnggota.Size = new System.Drawing.Size(507, 128);
             this.dgvDataAnggota.TabIndex = 2;
+            this.dgvDataAnggota.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataAnggota_CellContentClick);
             // 
             // btnAddAnggota
             // 
@@ -76,6 +77,7 @@
             this.btnAddAnggota.TabIndex = 3;
             this.btnAddAnggota.Text = "Add Anggota";
             this.btnAddAnggota.UseVisualStyleBackColor = true;
+            this.btnAddAnggota.Click += new System.EventHandler(this.btnAddAnggota_Click);
             // 
             // txtNamaKegiatan
             // 
@@ -109,13 +111,13 @@
             this.dtpJamPulang.Size = new System.Drawing.Size(96, 20);
             this.dtpJamPulang.TabIndex = 7;
             // 
-            // dataGridView1
+            // dgvKehadiran
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 293);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(507, 128);
-            this.dataGridView1.TabIndex = 8;
+            this.dgvKehadiran.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKehadiran.Location = new System.Drawing.Point(12, 293);
+            this.dgvKehadiran.Name = "dgvKehadiran";
+            this.dgvKehadiran.Size = new System.Drawing.Size(507, 128);
+            this.dgvKehadiran.TabIndex = 8;
             // 
             // btnAbsen
             // 
@@ -125,6 +127,7 @@
             this.btnAbsen.TabIndex = 9;
             this.btnAbsen.Text = "Fill";
             this.btnAbsen.UseVisualStyleBackColor = true;
+            this.btnAbsen.Click += new System.EventHandler(this.btnAbsen_Click);
             // 
             // txtNPA2
             // 
@@ -142,6 +145,7 @@
             this.btnAddKegiatan.TabIndex = 11;
             this.btnAddKegiatan.Text = "Add Kegiatan";
             this.btnAddKegiatan.UseVisualStyleBackColor = true;
+            this.btnAddKegiatan.Click += new System.EventHandler(this.btnAddKegiatan_Click);
             // 
             // frmMain
             // 
@@ -152,7 +156,7 @@
             this.Controls.Add(this.btnAddKegiatan);
             this.Controls.Add(this.txtNPA2);
             this.Controls.Add(this.btnAbsen);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvKehadiran);
             this.Controls.Add(this.dtpJamPulang);
             this.Controls.Add(this.dtpJamDatang);
             this.Controls.Add(this.txtID);
@@ -163,8 +167,9 @@
             this.Controls.Add(this.txtNama);
             this.Name = "frmMain";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataAnggota)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKehadiran)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,7 +185,7 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.DateTimePicker dtpJamDatang;
         private System.Windows.Forms.DateTimePicker dtpJamPulang;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvKehadiran;
         private System.Windows.Forms.Button btnAbsen;
         private System.Windows.Forms.TextBox txtNPA2;
         private System.Windows.Forms.Button btnAddKegiatan;
