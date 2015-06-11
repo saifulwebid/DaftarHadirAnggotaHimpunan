@@ -13,6 +13,16 @@ namespace WinForms
         private DateTime _jammulai;
         private DateTime _jamselesai;
 
+        public Kegiatan()
+        {
+
+        }
+
+        public Kegiatan(int id, string nama)
+        {
+            ID = id;
+            Nama = nama;
+        }
         public int ID
         {
             get { return _id; }
