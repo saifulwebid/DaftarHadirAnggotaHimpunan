@@ -36,5 +36,7 @@ namespace WinForms
             get { return _jamselesai; }
             set { _jamselesai = value; }
         }
+
+        
     }
 }
