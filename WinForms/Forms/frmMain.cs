@@ -14,6 +14,7 @@ namespace WinForms
     {
         BindingList<Anggota> dataAnggota = new BindingList<Anggota>();
         List<Kehadiran> dataHadir = new List<Kehadiran>();
+        
         Kegiatan kegiatan;
         
         public frmMain()
@@ -24,7 +25,12 @@ namespace WinForms
 
         private void btnAddAnggota_Click(object sender, EventArgs e)
         {
-            dataAnggota.Add(new Anggota(txtNpa.Text, txtNama.Text));
+            Kehadiran hadir = new Kehadiran();
+            Anggota anggota = new Anggota(txtNpa.Text, txtNama.Text);
+            dataAnggota.Add(anggota);
+            hadir.Anggota = anggota;
+            hadir.Status = JenisKehadiran.Alpa;
+            dataHadir.Add(hadir);
            
         }
 
@@ -54,25 +60,20 @@ namespace WinForms
 
         private void btnAbsen_Click(object sender, EventArgs e)
         {
+            
             /* Masih Bugs */
-            foreach (Anggota x in dataAnggota)
+            foreach (Kehadiran x in dataHadir)
             {
-                Kehadiran hadir = new Kehadiran();
-                hadir.Kegiatan = kegiatan;
-                hadir.Anggota = x;
-                
-                if (x.Nip == txtNPA2.Text || hadir.JamDatang != default(DateTime))
+                if (x.Status == JenisKehadiran.Alpa)
                 {
-                    hadir.JamDatang = dtpJamDatang.Value;
-                    hadir.JamPulang = dtpJamPulang.Value;
-                    hadir.Status = JenisKehadiran.Hadir;
+                    if (x.Anggota.Nip == txtNPA2.Text)
+                    {
+                        x.Kegiatan = kegiatan;
+                        x.JamDatang = dtpJamDatang.Value;
+                        x.JamPulang = dtpJamPulang.Value;
+                        x.Status = JenisKehadiran.Hadir;
+                    }
                 }
-                else 
-                {
-                    hadir.Status = JenisKehadiran.Alpa;
-                }
-
-                dataHadir.Add(hadir);
             }
 
             PrintTable();
@@ -92,6 +93,7 @@ namespace WinForms
                 i++;
             }
         }
+
 
     }
 }
