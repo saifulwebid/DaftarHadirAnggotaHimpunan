@@ -44,16 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enum.cs" />
-    <Compile Include="Anggota.cs" />
+    <Compile Include="Class\Enum.cs" />
+    <Compile Include="Class\Anggota.cs" />
     <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kegiatan.cs" />
-    <Compile Include="Kehadiran.cs" />
+    <Compile Include="Class\Kegiatan.cs" />
+    <Compile Include="Class\Kehadiran.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmMain.resx">
