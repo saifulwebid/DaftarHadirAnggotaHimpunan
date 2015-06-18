@@ -38,6 +38,8 @@ namespace WinForms
             _kegiatan = new Kegiatan();
             _kegiatan.ID = Convert.ToInt16(txtID.Text);
             _kegiatan.Nama = txtNamaKegiatan.Text;
+            _kegiatan.JamMulai = dtpJamDatang.Value;
+            _kegiatan.JamSelesai = dtpJamPulang.Value;
 
             foreach (Anggota anggota in _daftarAnggota)
             {
