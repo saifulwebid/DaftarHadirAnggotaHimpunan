@@ -118,6 +118,7 @@
             this.dgvKehadiran.Name = "dgvKehadiran";
             this.dgvKehadiran.Size = new System.Drawing.Size(507, 128);
             this.dgvKehadiran.TabIndex = 8;
+            this.dgvKehadiran.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvKehadiran_CellFormatting);
             // 
             // btnAbsen
             // 
