@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,31 +13,19 @@ namespace WinForms
 {
     public partial class frmMain : Form
     {
-        BindingList<Anggota> dataAnggota = new BindingList<Anggota>();
-        List<Kehadiran> dataHadir = new List<Kehadiran>();
-        
-        Kegiatan kegiatan;
+        private BindingList<Anggota> _daftarAnggota = new BindingList<Anggota>();
+        private Kegiatan _kegiatan;
         
         public frmMain()
         {
             InitializeComponent();
-            dgvDataAnggota.DataSource = dataAnggota;
+            dgvDataAnggota.DataSource = _daftarAnggota;
+            dgvKehadiran.AutoGenerateColumns = false;
         }
 
         private void btnAddAnggota_Click(object sender, EventArgs e)
         {
-            Kehadiran hadir = new Kehadiran();
-            Anggota anggota = new Anggota(txtNpa.Text, txtNama.Text);
-            dataAnggota.Add(anggota);
-            hadir.Anggota = anggota;
-            hadir.Status = JenisKehadiran.Alpa;
-            dataHadir.Add(hadir);
-           
-        }
-
-        private void dgvDataAnggota_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            _daftarAnggota.Add(new Anggota(txtNpa.Text, txtNama.Text));
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -46,51 +35,83 @@ namespace WinForms
 
         private void btnAddKegiatan_Click(object sender, EventArgs e)
         {
-            kegiatan = new Kegiatan(Convert.ToInt16(txtID.Text), txtNamaKegiatan.Text);
+            _kegiatan = new Kegiatan();
+            _kegiatan.ID = Convert.ToInt16(txtID.Text);
+            _kegiatan.Nama = txtNamaKegiatan.Text;
+
+            foreach (Anggota anggota in _daftarAnggota)
+            {
+                Kehadiran kehadiran = new Kehadiran();
+                kehadiran.Kegiatan = _kegiatan;
+                kehadiran.Anggota = anggota;
+                kehadiran.Status = JenisKehadiran.Alpa;
+
+                _kegiatan.Kehadiran.Add(kehadiran);
+            }
+
+            dgvKehadiran.DataSource = _kegiatan.Kehadiran;
+            //SetTableKehadiran();
         }
 
         public void SetTableKehadiran()
         {
-            dgvKehadiran.ColumnCount = 4;
-            dgvKehadiran.Columns[0].Name = "Anggota";
-            dgvKehadiran.Columns[1].Name = "Jam Datang";
-            dgvKehadiran.Columns[2].Name = "Jam Pulang";
-            dgvKehadiran.Columns[3].Name = "Status";
+            dgvKehadiran.AutoGenerateColumns = false;
+
+            dgvKehadiran.Columns.Add("NIMAnggota", "NIM");
+            dgvKehadiran.Columns.Add("NamaAnggota", "Nama");
+            dgvKehadiran.Columns.Add("JamDatang", "Jam Datang");
+            dgvKehadiran.Columns.Add("JamPulang", "Jam Pulang");
+            dgvKehadiran.Columns.Add("Status", "Status");
+
+            dgvKehadiran.Columns["NIMAnggota"].DataPropertyName = "Anggota.Nip";
+            dgvKehadiran.Columns["NamaAnggota"].DataPropertyName = "Anggota.Nama";
+            dgvKehadiran.Columns["JamDatang"].DataPropertyName = "JamDatang";
+            dgvKehadiran.Columns["JamPulang"].DataPropertyName = "JamPulang";
+            dgvKehadiran.Columns["Status"].DataPropertyName = "Status";
         }
 
         private void btnAbsen_Click(object sender, EventArgs e)
         {
             
             /* Masih Bugs */
-            foreach (Kehadiran x in dataHadir)
+            if (_kegiatan != null)
             {
-                if (x.Status == JenisKehadiran.Alpa)
+                foreach (Kehadiran x in _kegiatan.Kehadiran)
                 {
-                    if (x.Anggota.Nip == txtNPA2.Text)
+                    if (x.Status == JenisKehadiran.Alpa)
                     {
-                        x.Kegiatan = kegiatan;
-                        x.JamDatang = dtpJamDatang.Value;
-                        x.JamPulang = dtpJamPulang.Value;
-                        x.Status = JenisKehadiran.Hadir;
+                        if (x.Anggota.Nip == txtNPA2.Text)
+                        {
+                            x.Kegiatan = _kegiatan;
+                            x.JamDatang = dtpJamDatang.Value;
+                            x.JamPulang = dtpJamPulang.Value;
+                            x.Status = JenisKehadiran.Hadir;
+                        }
                     }
                 }
             }
 
-            PrintTable();
+            //PrintTable();
         }
 
         public void PrintTable()
         {
             dgvKehadiran.Rows.Clear();
             int i = 0;
-            foreach (Kehadiran x in dataHadir)
+
+            if (_kegiatan != null)
             {
-                dgvKehadiran.Rows.Add();
-                dgvKehadiran.Rows[i].Cells[0].Value = x.Anggota.Nama;
-                dgvKehadiran.Rows[i].Cells[1].Value = x.JamDatang.TimeOfDay.ToString();
-                dgvKehadiran.Rows[i].Cells[2].Value = x.JamPulang.TimeOfDay.ToString();
-                dgvKehadiran.Rows[i].Cells[3].Value = x.Status.ToString();
-                i++;
+                foreach (Kehadiran x in _kegiatan.Kehadiran)
+                {
+                    dgvKehadiran.Rows.Add();
+                    dgvKehadiran.Rows[i].Cells[0].Value = x.Anggota.Nama;
+                    dgvKehadiran.Rows[i].Cells[1].Value = x.JamDatang.TimeOfDay.ToString();
+                    dgvKehadiran.Rows[i].Cells[2].Value = x.JamPulang.TimeOfDay.ToString();
+                    dgvKehadiran.Rows[i].Cells[3].Value = x.Status.ToString();
+                    i++;
+                }
+            }
+        }
 
         private void dgvKehadiran_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {

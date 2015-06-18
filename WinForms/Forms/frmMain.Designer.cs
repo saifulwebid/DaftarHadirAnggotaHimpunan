@@ -67,7 +67,6 @@
             this.dgvDataAnggota.Name = "dgvDataAnggota";
             this.dgvDataAnggota.Size = new System.Drawing.Size(507, 128);
             this.dgvDataAnggota.TabIndex = 2;
-            this.dgvDataAnggota.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataAnggota_CellContentClick);
             // 
             // btnAddAnggota
             // 
