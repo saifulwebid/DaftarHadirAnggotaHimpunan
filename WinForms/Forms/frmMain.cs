@@ -79,17 +79,29 @@ namespace WinForms
             {
                 foreach (Kehadiran x in _kegiatan.Kehadiran)
                 {
-                    if (x.Status == JenisKehadiran.Alpa)
+                    if (x.Anggota.Nip == txtNPA2.Text)
                     {
-                        if (x.Anggota.Nip == txtNPA2.Text)
+                        if (x.Status == JenisKehadiran.Alpa)
                         {
-                            x.Kegiatan = _kegiatan;
-                            x.JamDatang = dtpJamDatang.Value;
-                            x.JamPulang = dtpJamPulang.Value;
-                            x.Status = JenisKehadiran.Hadir;
+                            x.JamDatang = DateTime.Now;
+
+                            if (x.JamDatang <= _kegiatan.JamMulai)
+                            {
+                                x.Status = JenisKehadiran.Hadir;
+                            }
+                            else
+                            {
+                                x.Status = JenisKehadiran.Telat;
+                            }
+                        }
+                        else if (x.Status == JenisKehadiran.Hadir || x.Status == JenisKehadiran.Telat)
+                        {
+                            x.JamPulang = DateTime.Now;
                         }
                     }
                 }
+                
+                _kegiatan.Kehadiran.ResetBindings();
             }
         }
 
