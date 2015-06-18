@@ -62,13 +62,18 @@ namespace WinForms
             dgvKehadiran.Columns.Add("NamaAnggota", "Nama");
             dgvKehadiran.Columns.Add("JamDatang", "Jam Datang");
             dgvKehadiran.Columns.Add("JamPulang", "Jam Pulang");
-            dgvKehadiran.Columns.Add("Status", "Status");
 
             dgvKehadiran.Columns["NIMAnggota"].DataPropertyName = "Anggota.Nip";
             dgvKehadiran.Columns["NamaAnggota"].DataPropertyName = "Anggota.Nama";
             dgvKehadiran.Columns["JamDatang"].DataPropertyName = "JamDatang";
             dgvKehadiran.Columns["JamPulang"].DataPropertyName = "JamPulang";
-            dgvKehadiran.Columns["Status"].DataPropertyName = "Status";
+
+            DataGridViewComboBoxColumn statusColumn = new DataGridViewComboBoxColumn();
+            statusColumn.HeaderText = "Status Kehadiran";
+            statusColumn.DataSource = Enum.GetValues(typeof (JenisKehadiran));
+            statusColumn.DataPropertyName = "Status";
+
+            dgvKehadiran.Columns.Add(statusColumn);
         }
 
         private void btnAbsen_Click(object sender, EventArgs e)
