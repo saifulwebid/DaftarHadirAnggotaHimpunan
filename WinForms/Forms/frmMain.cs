@@ -50,7 +50,6 @@ namespace WinForms
             }
 
             dgvKehadiran.DataSource = _kegiatan.Kehadiran;
-            //SetTableKehadiran();
         }
 
         public void SetTableKehadiran()
@@ -90,27 +89,6 @@ namespace WinForms
                     }
                 }
             }
-
-            //PrintTable();
-        }
-
-        public void PrintTable()
-        {
-            dgvKehadiran.Rows.Clear();
-            int i = 0;
-
-            if (_kegiatan != null)
-            {
-                foreach (Kehadiran x in _kegiatan.Kehadiran)
-                {
-                    dgvKehadiran.Rows.Add();
-                    dgvKehadiran.Rows[i].Cells[0].Value = x.Anggota.Nama;
-                    dgvKehadiran.Rows[i].Cells[1].Value = x.JamDatang.TimeOfDay.ToString();
-                    dgvKehadiran.Rows[i].Cells[2].Value = x.JamPulang.TimeOfDay.ToString();
-                    dgvKehadiran.Rows[i].Cells[3].Value = x.Status.ToString();
-                    i++;
-                }
-            }
         }
 
         private void dgvKehadiran_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -139,7 +117,5 @@ namespace WinForms
                 e.Value = val;
             }
         }
-
-
     }
 }
