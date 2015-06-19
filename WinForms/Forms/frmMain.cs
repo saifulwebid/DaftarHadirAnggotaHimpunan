@@ -175,6 +175,7 @@ namespace WinForms
 
         }
 
+        /*Membuka Form Scan dan Mengambil Isi dari Qr Code*/
         private string GetData()
         {
             frmScan FrmScan = new frmScan();
