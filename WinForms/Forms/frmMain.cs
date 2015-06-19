@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinForms.Forms;
 
 namespace WinForms
 {
@@ -15,6 +16,7 @@ namespace WinForms
     {
         private BindingList<Anggota> _daftarAnggota = new BindingList<Anggota>();
         private Kegiatan _kegiatan;
+        private string result;
         
         public frmMain()
         {
@@ -135,6 +137,42 @@ namespace WinForms
                 }
                 e.Value = val;
             }
+        }
+
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            result = GetData();
+            if (result != null)
+            {
+                int i = 0;
+                bool found = false;
+                string name = null;
+                while ( !found && i < _daftarAnggota.Count())
+                {
+                    if (_daftarAnggota[i].Nip == result )
+                    {
+                        found = true;
+                        name = _daftarAnggota[i].Nama;
+                    }
+                    else i++;
+                }
+                if (found)
+                {
+                    if (MessageBox.Show("Apakah anda : " + name, "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        txtNPA2.Text = result;
+                    }
+                }
+                
+            }
+
+        }
+
+        private string GetData()
+        {
+            frmScan FrmScan = new frmScan();
+            FrmScan.ShowDialog();
+            return FrmScan.GetData;
         }
     }
 }

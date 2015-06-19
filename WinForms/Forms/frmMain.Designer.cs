@@ -41,6 +41,7 @@
             this.txtNPA2 = new System.Windows.Forms.TextBox();
             this.btnAddKegiatan = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
+            this.btnScan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataAnggota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKehadiran)).BeginInit();
             this.SuspendLayout();
@@ -157,12 +158,23 @@
             this.btnExport.Text = "Export ke Excel";
             this.btnExport.UseVisualStyleBackColor = true;
             // 
+            // btnScan
+            // 
+            this.btnScan.Location = new System.Drawing.Point(93, 426);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(88, 23);
+            this.btnScan.TabIndex = 13;
+            this.btnScan.Text = "Scan ID Card";
+            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(538, 455);
+            this.Controls.Add(this.btnScan);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnAddKegiatan);
             this.Controls.Add(this.txtNPA2);
@@ -201,6 +213,7 @@
         private System.Windows.Forms.TextBox txtNPA2;
         private System.Windows.Forms.Button btnAddKegiatan;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnScan;
     }
 }
 
