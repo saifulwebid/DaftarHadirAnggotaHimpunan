@@ -11,7 +11,7 @@ namespace WinForms.Class
     {
         public FilterInfoCollection Devices { get; private set; }
         public VideoCaptureDevice Current { get; private set; }
-
+        
         public CameraDevices()
         {
             Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
