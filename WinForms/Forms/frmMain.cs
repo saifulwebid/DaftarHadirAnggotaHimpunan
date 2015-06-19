@@ -158,10 +158,17 @@ namespace WinForms
                 }
                 if (found)
                 {
+                    //Validasi kesesuaian data dari qr code
                     if (MessageBox.Show("Apakah anda : " + name, "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         txtNPA2.Text = result;
+                        //Update selanjutnya : langsung mengisi daftar hadir
                     }
+                }
+                else
+                {
+                    MessageBox.Show("NPA dengan ID : " + result + " Tidak Ditemukan");
+                    //Update selanjutnya : langsung buka webcam lagi untuk scan qr code
                 }
                 
             }
