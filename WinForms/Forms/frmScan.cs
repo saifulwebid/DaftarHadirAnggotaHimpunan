@@ -8,24 +8,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
-using WinForms.Class;
 using ZXing;
 using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace WinForms.Forms
 {
     public partial class frmScan : Form
     {
-        private struct Device
+        class CameraDevices
         {
-            public int Index;
-            public string Name;
-            public override string ToString()
+            public FilterInfoCollection Devices { get; private set; }
+            public VideoCaptureDevice Current { get; private set; }
+
+            public CameraDevices()
             {
-                return Name;
+                Devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            }
+
+            public void SelectCamera(int index)
+            {
+                if (index >= Devices.Count)
+                {
+                    throw new ArgumentOutOfRangeException("index");
+                }
+                Current = new VideoCaptureDevice(Devices[index].MonikerString);
             }
         }
-
+        
         private readonly CameraDevices camDevices;
         private Bitmap currentBitmapForDecoding;
         private readonly Thread decodingThread;
