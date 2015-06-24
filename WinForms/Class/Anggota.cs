@@ -9,5 +9,10 @@
         public string NomorHandphone { get; set; }
         public string NamaBagus { get; set; }
         public string Departemen { get; set; }
+
+        public void Save()
+        {
+            SQLiteDatabase.SaveAnggota(this);
+        }
     }
 }
