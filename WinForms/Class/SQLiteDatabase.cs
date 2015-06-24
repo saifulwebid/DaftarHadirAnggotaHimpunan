@@ -104,6 +104,33 @@ namespace WinForms.Class
             con.Close();
         }
 
+        public static BindingList<Kehadiran> GetAllKehadiran(Kegiatan kegiatan)
+        {
+            BindingList<Kehadiran> result = new BindingList<Kehadiran>();
+            BindingList<Anggota> anggota = GetAllAnggota();
+            con.Open();
+
+            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM kehadiran WHERE Kegiatan=@Kegiatan", con);
+            cmd.Parameters.AddWithValue("Kegiatan", kegiatan.ID);
+            using (SQLiteDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    Kehadiran kehadiran = new Kehadiran();
+                    kehadiran.Kegiatan = kegiatan;
+                    kehadiran.Anggota = anggota.SingleOrDefault(a => a.NomorAnggota.Equals(dr["Anggota"]));
+                    kehadiran.Status = (JenisKehadiran)Convert.ToInt32(dr["Status"]);
+                    kehadiran.JamDatang = Convert.ToDateTime(dr["JamDatang"]);
+                    kehadiran.JamPulang = Convert.ToDateTime(dr["JamPulang"]);
+
+                    result.Add(kehadiran);
+                }
+            }
+
+            con.Close();
+            return result;
+        }
+
         public static void SaveKehadiran(Kehadiran kehadiran)
         {
             con.Open();

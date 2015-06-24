@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace WinForms.Class
 {
@@ -9,6 +10,11 @@ namespace WinForms.Class
         public JenisKehadiran Status { get; set; }
         public DateTime JamDatang { get; set; }
         public DateTime JamPulang { get; set; }
+
+        public static BindingList<Kehadiran> GetAll(Kegiatan kegiatan)
+        {
+            return SQLiteDatabase.GetAllKehadiran(kegiatan);
+        }
 
         public void Save()
         {
