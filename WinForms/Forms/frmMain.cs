@@ -22,7 +22,11 @@ namespace WinForms.Forms
 
         private void btnAddAnggota_Click(object sender, EventArgs e)
         {
-            _daftarAnggota.Add(new Anggota(txtNpa.Text, txtNama.Text));
+            Anggota anggota = new Anggota();
+            anggota.Nip = txtNpa.Text;
+            anggota.Nama = txtNama.Text;
+            
+            _daftarAnggota.Add(anggota);
         }
 
         private void frmMain_Load(object sender, EventArgs e)
