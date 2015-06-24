@@ -50,14 +50,14 @@ namespace WinForms.Class
             if (Convert.ToInt32(cmd.ExecuteScalar()) == 1) // data ditemukan, lakukan perubahan
             {
                 command = "UPDATE anggota SET NomorMahasiswa=@NomorMahasiswa, Kelas=@Kelas, Nama=@Nama, " +
-                    "NomorHandphone=@NomorHandphone, NamaBagus=@NamaBagus, Departemen=@Departemen " +
-                    "WHERE NomorAnggota=@NomorAnggota";
+                          "NomorHandphone=@NomorHandphone, NamaBagus=@NamaBagus, Departemen=@Departemen " +
+                          "WHERE NomorAnggota=@NomorAnggota";
             }
             else // data tidak ditemukan, buat data baru
             {
                 command = "INSERT INTO anggota (NomorAnggota, NomorMahasiswa, Kelas, Nama, " +
-                    "NomorHandphone, NamaBagus, Departemen) VALUES (@NomorAnggota, @NomorMahasiswa, " +
-                    "@Kelas, @Nama, @NomorHandphone, @NamaBagus, @Departemen)";
+                          "NomorHandphone, NamaBagus, Departemen) VALUES (@NomorAnggota, @NomorMahasiswa, " +
+                          "@Kelas, @Nama, @NomorHandphone, @NamaBagus, @Departemen)";
             }
 
             cmd = new SQLiteCommand(command, con);
