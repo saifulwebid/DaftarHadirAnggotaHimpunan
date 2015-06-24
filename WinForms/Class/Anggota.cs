@@ -25,7 +25,7 @@ namespace WinForms.Class
 
         public void ProsesKehadiran(Kegiatan kegiatan)
         {
-            foreach (Kehadiran x in kegiatan.Kehadiran)
+            foreach (Kehadiran x in kegiatan.DaftarKehadiran)
             {
                 if (x.Anggota.NomorAnggota.Equals(this.NomorAnggota))
                 {
@@ -49,7 +49,7 @@ namespace WinForms.Class
                 }
             }
 
-            kegiatan.Kehadiran.ResetBindings();
+            kegiatan.DaftarKehadiran.ResetBindings();
         }
     }
 }

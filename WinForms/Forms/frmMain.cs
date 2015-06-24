@@ -52,7 +52,7 @@ namespace WinForms.Forms
             _kegiatan.PrepareEmptyKehadiran(_daftarAnggota);
             _kegiatan.Save();
 
-            dgvKehadiran.DataSource = _kegiatan.Kehadiran;
+            dgvKehadiran.DataSource = _kegiatan.DaftarKehadiran;
         }
 
         public void SetTableKehadiran()

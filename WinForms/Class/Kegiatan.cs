@@ -9,12 +9,12 @@ namespace WinForms.Class
         public string Nama { get; set; }
         public DateTime JamMulai { get; set; }
         public DateTime JamSelesai { get; set; }
-        public BindingList<Kehadiran> Kehadiran { get; private set; }
+        public BindingList<Kehadiran> DaftarKehadiran { get; private set; }
 
         /** Constructor **/
         public Kegiatan()
         {
-            Kehadiran = new BindingList<Kehadiran>();
+            DaftarKehadiran = new BindingList<Kehadiran>();
         }
 
         public static BindingList<Kegiatan> GetAll()
@@ -24,7 +24,7 @@ namespace WinForms.Class
 
         public void PrepareEmptyKehadiran(BindingList<Anggota> listAnggota)
         {
-            this.Kehadiran.Clear();
+            this.DaftarKehadiran.Clear();
             
             foreach (Anggota anggota in listAnggota)
             {
@@ -33,7 +33,7 @@ namespace WinForms.Class
                 kehadiran.Anggota = anggota;
                 kehadiran.Status = JenisKehadiran.Alpa;
 
-                this.Kehadiran.Add(kehadiran);
+                this.DaftarKehadiran.Add(kehadiran);
             }
         }
 
@@ -46,7 +46,7 @@ namespace WinForms.Class
         {
             SQLiteDatabase.SaveKegiatan(this);
 
-            foreach (Kehadiran kehadiran in Kehadiran)
+            foreach (Kehadiran kehadiran in DaftarKehadiran)
             {
                 kehadiran.Save();
             }
