@@ -9,5 +9,10 @@ namespace WinForms.Class
         public JenisKehadiran Status { get; set; }
         public DateTime JamDatang { get; set; }
         public DateTime JamPulang { get; set; }
+
+        public void Save()
+        {
+            SQLiteDatabase.SaveKehadiran(this);
+        }
     }
 }
