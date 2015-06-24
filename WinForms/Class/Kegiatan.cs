@@ -39,7 +39,7 @@ namespace WinForms.Class
 
         public void PrepareKehadiranFromDatabase()
         {
-            throw new NotImplementedException();
+            this.DaftarKehadiran = Kehadiran.GetAll(this);
         }
 
         public void Save()
