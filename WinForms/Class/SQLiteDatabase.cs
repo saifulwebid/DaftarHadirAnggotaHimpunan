@@ -56,7 +56,8 @@ namespace WinForms.Class
             else // data tidak ditemukan, buat data baru
             {
                 command = "INSERT INTO anggota (NomorAnggota, NomorMahasiswa, Kelas, Nama, " +
-                    "NomorHandphone, NamaBagus, Departemen) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    "NomorHandphone, NamaBagus, Departemen) VALUES (@NomorAnggota, @NomorMahasiswa, " +
+                    "@Kelas, @Nama, @NomorHandphone, @NamaBagus, @Departemen)";
             }
 
             cmd = new SQLiteCommand(command, con);
