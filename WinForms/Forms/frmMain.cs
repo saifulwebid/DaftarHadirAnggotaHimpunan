@@ -23,7 +23,7 @@ namespace WinForms.Forms
         private void btnAddAnggota_Click(object sender, EventArgs e)
         {
             Anggota anggota = new Anggota();
-            anggota.Nip = txtNpa.Text;
+            anggota.NomorAnggota = txtNpa.Text;
             anggota.Nama = txtNama.Text;
             
             _daftarAnggota.Add(anggota);
@@ -64,7 +64,7 @@ namespace WinForms.Forms
             dgvKehadiran.Columns.Add("JamDatang", "Jam Datang");
             dgvKehadiran.Columns.Add("JamPulang", "Jam Pulang");
 
-            dgvKehadiran.Columns["NIMAnggota"].DataPropertyName = "Anggota.Nip";
+            dgvKehadiran.Columns["NIMAnggota"].DataPropertyName = "Anggota.NomorAnggota";
             dgvKehadiran.Columns["NamaAnggota"].DataPropertyName = "Anggota.Nama";
             dgvKehadiran.Columns["JamDatang"].DataPropertyName = "JamDatang";
             dgvKehadiran.Columns["JamPulang"].DataPropertyName = "JamPulang";
@@ -85,7 +85,7 @@ namespace WinForms.Forms
             {
                 foreach (Kehadiran x in _kegiatan.Kehadiran)
                 {
-                    if (x.Anggota.Nip == txtNPA2.Text)
+                    if (x.Anggota.NomorAnggota == txtNPA2.Text)
                     {
                         if (x.Status == JenisKehadiran.Alpa)
                         {
@@ -148,7 +148,7 @@ namespace WinForms.Forms
                 string name = null;
                 while ( !found && i < _daftarAnggota.Count())
                 {
-                    if (_daftarAnggota[i].Nip == result )
+                    if (_daftarAnggota[i].NomorAnggota == result )
                     {
                         found = true;
                         name = _daftarAnggota[i].Nama;
