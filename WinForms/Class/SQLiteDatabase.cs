@@ -43,19 +43,41 @@ namespace WinForms.Class
         {
             con.Open();
 
-            string command = "INSERT INTO anggota (NomorAnggota, NomorMahasiswa, Kelas, Nama, " +
-                "NomorHandphone, NamaBagus, Departemen) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+            string command = "SELECT COUNT(*) AS count FROM anggota WHERE NomorAnggota=?";
             SQLiteCommand cmd = new SQLiteCommand(command, con);
-            cmd.Parameters.Add(anggota.NomorAnggota);
-            cmd.Parameters.Add(anggota.NomorMahasiswa);
-            cmd.Parameters.Add(anggota.Kelas);
-            cmd.Parameters.Add(anggota.Nama);
-            cmd.Parameters.Add(anggota.NomorHandphone);
-            cmd.Parameters.Add(anggota.NamaBagus);
-            cmd.Parameters.Add(anggota.Departemen);
 
-            cmd.ExecuteNonQuery();
+            if ((int) cmd.ExecuteScalar() == 1) // data ditemukan, lakukan perubahan
+            {
+                command = "UPDATE anggota SET NomorMahasiswa=?, Kelas=?, Nama=?, NomorHandphone=?, " +
+                    "NamaBagus=?, Departemen=? WHERE NomorAnggota=?";
+
+                cmd = new SQLiteCommand(command, con);
+                cmd.Parameters.Add(anggota.NomorMahasiswa);
+                cmd.Parameters.Add(anggota.Kelas);
+                cmd.Parameters.Add(anggota.Nama);
+                cmd.Parameters.Add(anggota.NomorHandphone);
+                cmd.Parameters.Add(anggota.NamaBagus);
+                cmd.Parameters.Add(anggota.Departemen);
+                cmd.Parameters.Add(anggota.NomorAnggota);
+
+                cmd.ExecuteNonQuery();
+            }
+            else // data tidak ditemukan, buat data baru
+            {
+                command = "INSERT INTO anggota (NomorAnggota, NomorMahasiswa, Kelas, Nama, " +
+                    "NomorHandphone, NamaBagus, Departemen) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                cmd = new SQLiteCommand(command, con);
+                cmd.Parameters.Add(anggota.NomorAnggota);
+                cmd.Parameters.Add(anggota.NomorMahasiswa);
+                cmd.Parameters.Add(anggota.Kelas);
+                cmd.Parameters.Add(anggota.Nama);
+                cmd.Parameters.Add(anggota.NomorHandphone);
+                cmd.Parameters.Add(anggota.NamaBagus);
+                cmd.Parameters.Add(anggota.Departemen);
+
+                cmd.ExecuteNonQuery();
+            }
 
             con.Dispose();
         }
