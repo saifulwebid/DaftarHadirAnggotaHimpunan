@@ -74,6 +74,36 @@ namespace WinForms.Class
             con.Close();
         }
 
+        public static void SaveKegiatan(Kegiatan kegiatan)
+        {
+            con.Open();
+
+            string command = "SELECT COUNT(*) AS count FROM kegiatan WHERE ID=@ID";
+            SQLiteCommand cmd = new SQLiteCommand(command, con);
+            cmd.Parameters.AddWithValue("ID", kegiatan.ID);
+
+            if (Convert.ToInt32(cmd.ExecuteScalar()) == 1) // data ditemukan, lakukan perubahan
+            {
+                command = "UPDATE kegiatan SET Nama=@Nama, JamMulai=@JamMulai, JamSelesai=@JamSelesai " +
+                          "WHERE ID=@ID";
+            }
+            else // data tidak ditemukan, buat data baru
+            {
+                command = "INSERT INTO kegiatan (ID, Nama, JamMulai, JamSelesai) VALUES (@ID, @Nama, " +
+                          "@JamMulai, @JamSelesai)";
+            }
+
+            cmd = new SQLiteCommand(command, con);
+            cmd.Parameters.AddWithValue("ID", kegiatan.ID);
+            cmd.Parameters.AddWithValue("Nama", kegiatan.Nama);
+            cmd.Parameters.AddWithValue("JamMulai", kegiatan.JamMulai);
+            cmd.Parameters.AddWithValue("JamSelesai", kegiatan.JamSelesai);
+
+            cmd.ExecuteNonQuery();
+
+            con.Close();
+        }
+
         public static void SaveKehadiran(Kehadiran kehadiran)
         {
             con.Open();

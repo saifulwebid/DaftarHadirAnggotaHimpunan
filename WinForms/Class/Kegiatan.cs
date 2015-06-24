@@ -31,5 +31,15 @@ namespace WinForms.Class
                 this.Kehadiran.Add(kehadiran);
             }
         }
+
+        public void Save()
+        {
+            SQLiteDatabase.SaveKegiatan(this);
+
+            foreach (Kehadiran kehadiran in Kehadiran)
+            {
+                kehadiran.Save();
+            }
+        }
     }
 }

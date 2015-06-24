@@ -50,6 +50,7 @@ namespace WinForms.Forms
             _kegiatan.JamMulai = dtpJamDatang.Value;
             _kegiatan.JamSelesai = dtpJamPulang.Value;
             _kegiatan.PrepareKehadiran(_daftarAnggota);
+            _kegiatan.Save();
 
             dgvKehadiran.DataSource = _kegiatan.Kehadiran;
         }
