@@ -17,7 +17,7 @@ namespace WinForms.Class
             Kehadiran = new BindingList<Kehadiran>();
         }
 
-        public void PrepareKehadiran(BindingList<Anggota> listAnggota)
+        public void PrepareEmptyKehadiran(BindingList<Anggota> listAnggota)
         {
             this.Kehadiran.Clear();
             
