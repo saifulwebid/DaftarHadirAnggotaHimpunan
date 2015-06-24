@@ -31,11 +31,10 @@ namespace WinForms.Forms
 
         private void btnAddAnggota_Click(object sender, EventArgs e)
         {
-            Anggota anggota = new Anggota();
-            anggota.NomorAnggota = txtNpa.Text;
-            anggota.Nama = txtNama.Text;
-            
-            DaftarAnggota.Add(anggota);
+            foreach (Anggota anggota in _daftarAnggota)
+            {
+                anggota.Save();
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)

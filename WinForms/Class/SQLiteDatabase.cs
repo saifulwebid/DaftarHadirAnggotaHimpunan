@@ -35,7 +35,7 @@ namespace WinForms.Class
                 }
             }
 
-            con.Dispose();
+            con.Close();
             return result;
         }
 
@@ -43,43 +43,34 @@ namespace WinForms.Class
         {
             con.Open();
 
-            string command = "SELECT COUNT(*) AS count FROM anggota WHERE NomorAnggota=?";
+            string command = "SELECT COUNT(*) AS count FROM anggota WHERE NomorAnggota=@NomorAnggota";
             SQLiteCommand cmd = new SQLiteCommand(command, con);
+            cmd.Parameters.AddWithValue("NomorAnggota", anggota.NomorAnggota);
 
-            if ((int) cmd.ExecuteScalar() == 1) // data ditemukan, lakukan perubahan
+            if (Convert.ToInt32(cmd.ExecuteScalar()) == 1) // data ditemukan, lakukan perubahan
             {
-                command = "UPDATE anggota SET NomorMahasiswa=?, Kelas=?, Nama=?, NomorHandphone=?, " +
-                    "NamaBagus=?, Departemen=? WHERE NomorAnggota=?";
-
-                cmd = new SQLiteCommand(command, con);
-                cmd.Parameters.Add(anggota.NomorMahasiswa);
-                cmd.Parameters.Add(anggota.Kelas);
-                cmd.Parameters.Add(anggota.Nama);
-                cmd.Parameters.Add(anggota.NomorHandphone);
-                cmd.Parameters.Add(anggota.NamaBagus);
-                cmd.Parameters.Add(anggota.Departemen);
-                cmd.Parameters.Add(anggota.NomorAnggota);
-
-                cmd.ExecuteNonQuery();
+                command = "UPDATE anggota SET NomorMahasiswa=@NomorMahasiswa, Kelas=@Kelas, Nama=@Nama, " +
+                    "NomorHandphone=@NomorHandphone, NamaBagus=@NamaBagus, Departemen=@Departemen " +
+                    "WHERE NomorAnggota=@NomorAnggota";
             }
             else // data tidak ditemukan, buat data baru
             {
                 command = "INSERT INTO anggota (NomorAnggota, NomorMahasiswa, Kelas, Nama, " +
                     "NomorHandphone, NamaBagus, Departemen) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-                cmd = new SQLiteCommand(command, con);
-                cmd.Parameters.Add(anggota.NomorAnggota);
-                cmd.Parameters.Add(anggota.NomorMahasiswa);
-                cmd.Parameters.Add(anggota.Kelas);
-                cmd.Parameters.Add(anggota.Nama);
-                cmd.Parameters.Add(anggota.NomorHandphone);
-                cmd.Parameters.Add(anggota.NamaBagus);
-                cmd.Parameters.Add(anggota.Departemen);
-
-                cmd.ExecuteNonQuery();
             }
 
-            con.Dispose();
+            cmd = new SQLiteCommand(command, con);
+            cmd.Parameters.AddWithValue("NomorAnggota", anggota.NomorAnggota);
+            cmd.Parameters.AddWithValue("NomorMahasiswa", anggota.NomorMahasiswa);
+            cmd.Parameters.AddWithValue("Kelas", anggota.Kelas);
+            cmd.Parameters.AddWithValue("Nama", anggota.Nama);
+            cmd.Parameters.AddWithValue("NomorHandphone", anggota.NomorHandphone);
+            cmd.Parameters.AddWithValue("NamaBagus", anggota.NamaBagus);
+            cmd.Parameters.AddWithValue("Departemen", anggota.Departemen);
+
+            cmd.ExecuteNonQuery();
+
+            con.Close();
         }
     }
 }
