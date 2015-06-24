@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Class\Enum.cs" />
     <Compile Include="Class\Anggota.cs" />
+    <Compile Include="Class\SQLiteDatabase.cs" />
     <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>

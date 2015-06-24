@@ -4,44 +4,29 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using WinForms.Class;
-using System.Data.SQLite;
 
 namespace WinForms.Forms
 {
     public partial class frmMain : Form
     {
-        private BindingList<Anggota> _daftarAnggota = new BindingList<Anggota>();
+        private BindingList<Anggota> _daftarAnggota;
+        public BindingList<Anggota> DaftarAnggota
+        {
+            get { return _daftarAnggota; }
+            set
+            {
+                _daftarAnggota = value;
+                dgvDataAnggota.DataSource = _daftarAnggota;
+            }
+        }
         private Kegiatan _kegiatan;
         private string result;
         
         public frmMain()
         {
             InitializeComponent();
-            dgvDataAnggota.DataSource = _daftarAnggota;
+            DaftarAnggota = SQLiteDatabase.GetAllAnggota();
             dgvKehadiran.AutoGenerateColumns = false;
-
-            SQLiteConnection con = new SQLiteConnection("Data Source=Database/data.db");
-            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM anggota", con);
-
-            con.Open();
-            using (SQLiteDataReader dr = cmd.ExecuteReader())
-            {
-                while (dr.Read())
-                {
-                    Anggota anggota = new Anggota();
-                    anggota.NomorAnggota = dr["NomorAnggota"].ToString();
-                    anggota.NomorMahasiswa = dr["NomorMahasiswa"].ToString();
-                    anggota.Kelas = dr["Kelas"].ToString();
-                    anggota.Nama = dr["Nama"].ToString();
-                    anggota.NomorHandphone = dr["NomorHandphone"].ToString();
-                    anggota.NamaBagus = dr["NamaBagus"].ToString();
-                    anggota.Departemen = dr["Departemen"].ToString();
-
-                    _daftarAnggota.Add(anggota);
-                }
-            }
-
-            con.Close();
         }
 
         private void btnAddAnggota_Click(object sender, EventArgs e)
@@ -50,7 +35,7 @@ namespace WinForms.Forms
             anggota.NomorAnggota = txtNpa.Text;
             anggota.Nama = txtNama.Text;
             
-            _daftarAnggota.Add(anggota);
+            DaftarAnggota.Add(anggota);
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -66,7 +51,7 @@ namespace WinForms.Forms
             _kegiatan.JamMulai = dtpJamDatang.Value;
             _kegiatan.JamSelesai = dtpJamPulang.Value;
 
-            foreach (Anggota anggota in _daftarAnggota)
+            foreach (Anggota anggota in DaftarAnggota)
             {
                 Kehadiran kehadiran = new Kehadiran();
                 kehadiran.Kegiatan = _kegiatan;
@@ -170,12 +155,12 @@ namespace WinForms.Forms
                 int i = 0;
                 bool found = false;
                 string name = null;
-                while ( !found && i < _daftarAnggota.Count())
+                while ( !found && i < DaftarAnggota.Count())
                 {
-                    if (_daftarAnggota[i].NomorAnggota == result )
+                    if (DaftarAnggota[i].NomorAnggota == result )
                     {
                         found = true;
-                        name = _daftarAnggota[i].Nama;
+                        name = DaftarAnggota[i].Nama;
                     }
                     else i++;
                 }
