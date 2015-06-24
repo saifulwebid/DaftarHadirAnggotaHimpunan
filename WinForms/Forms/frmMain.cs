@@ -79,35 +79,16 @@ namespace WinForms.Forms
 
         private void btnAbsen_Click(object sender, EventArgs e)
         {
-            
-            /* Masih Bugs */
             if (_kegiatan != null)
             {
-                foreach (Kehadiran x in _kegiatan.Kehadiran)
+                foreach (Anggota anggota in _daftarAnggota)
                 {
-                    if (x.Anggota.NomorAnggota == txtNPA2.Text)
+                    if (anggota.NomorAnggota.Equals(txtNPA2.Text))
                     {
-                        if (x.Status == JenisKehadiran.Alpa)
-                        {
-                            x.JamDatang = DateTime.Now;
-
-                            if (x.JamDatang <= _kegiatan.JamMulai)
-                            {
-                                x.Status = JenisKehadiran.Hadir;
-                            }
-                            else
-                            {
-                                x.Status = JenisKehadiran.Telat;
-                            }
-                        }
-                        else if (x.Status == JenisKehadiran.Hadir || x.Status == JenisKehadiran.Telat)
-                        {
-                            x.JamPulang = DateTime.Now;
-                        }
+                        anggota.ProsesKehadiran(_kegiatan);
+                        return;
                     }
                 }
-                
-                _kegiatan.Kehadiran.ResetBindings();
             }
         }
 

@@ -1,4 +1,6 @@
-﻿namespace WinForms.Class
+﻿using System;
+
+namespace WinForms.Class
 {
     public class Anggota
     {
@@ -13,6 +15,35 @@
         public void Save()
         {
             SQLiteDatabase.SaveAnggota(this);
+        }
+
+        public void ProsesKehadiran(Kegiatan kegiatan)
+        {
+            foreach (Kehadiran x in kegiatan.Kehadiran)
+            {
+                if (x.Anggota.NomorAnggota.Equals(this.NomorAnggota))
+                {
+                    if (x.Status == JenisKehadiran.Alpa)
+                    {
+                        x.JamDatang = DateTime.Now;
+
+                        if (x.JamDatang <= kegiatan.JamMulai)
+                        {
+                            x.Status = JenisKehadiran.Hadir;
+                        }
+                        else
+                        {
+                            x.Status = JenisKehadiran.Telat;
+                        }
+                    }
+                    else if (x.Status == JenisKehadiran.Hadir || x.Status == JenisKehadiran.Telat)
+                    {
+                        x.JamPulang = DateTime.Now;
+                    }
+                }
+            }
+
+            kegiatan.Kehadiran.ResetBindings();
         }
     }
 }
