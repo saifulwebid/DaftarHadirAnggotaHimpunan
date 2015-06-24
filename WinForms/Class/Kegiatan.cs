@@ -16,5 +16,20 @@ namespace WinForms.Class
         {
             Kehadiran = new BindingList<Kehadiran>();
         }
+
+        public void PrepareKehadiran(BindingList<Anggota> listAnggota)
+        {
+            this.Kehadiran.Clear();
+            
+            foreach (Anggota anggota in listAnggota)
+            {
+                Kehadiran kehadiran = new Kehadiran();
+                kehadiran.Kegiatan = this;
+                kehadiran.Anggota = anggota;
+                kehadiran.Status = JenisKehadiran.Alpa;
+
+                this.Kehadiran.Add(kehadiran);
+            }
+        }
     }
 }

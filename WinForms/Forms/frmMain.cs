@@ -50,16 +50,7 @@ namespace WinForms.Forms
             _kegiatan.Nama = txtNamaKegiatan.Text;
             _kegiatan.JamMulai = dtpJamDatang.Value;
             _kegiatan.JamSelesai = dtpJamPulang.Value;
-
-            foreach (Anggota anggota in DaftarAnggota)
-            {
-                Kehadiran kehadiran = new Kehadiran();
-                kehadiran.Kegiatan = _kegiatan;
-                kehadiran.Anggota = anggota;
-                kehadiran.Status = JenisKehadiran.Alpa;
-
-                _kegiatan.Kehadiran.Add(kehadiran);
-            }
+            _kegiatan.PrepareKehadiran(_daftarAnggota);
 
             dgvKehadiran.DataSource = _kegiatan.Kehadiran;
         }
