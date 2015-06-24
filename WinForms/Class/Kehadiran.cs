@@ -2,7 +2,7 @@
 
 namespace WinForms.Class
 {
-    class Kehadiran
+    public class Kehadiran
     {
         public Kegiatan Kegiatan { get; set; }
         public Anggota Anggota { get; set; }

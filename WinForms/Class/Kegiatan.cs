@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace WinForms.Class
 {
-    class Kegiatan
+    public class Kegiatan
     {
         public int ID { get; set; }
         public string Nama { get; set; }

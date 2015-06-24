@@ -1,6 +1,6 @@
 ﻿namespace WinForms.Class
 {
-    class Anggota
+    public class Anggota
     {
         public string NomorAnggota { get; set; }
         public string NomorMahasiswa { get; set; }
