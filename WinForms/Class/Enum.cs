@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WinForms
+namespace WinForms.Class
 {
     [Flags]
     public enum JenisKehadiran { Hadir, Sakit, Izin, Telat, Alpa }

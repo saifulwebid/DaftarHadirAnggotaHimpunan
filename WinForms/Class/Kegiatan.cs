@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace WinForms
+namespace WinForms.Class
 {
     class Kegiatan
     {

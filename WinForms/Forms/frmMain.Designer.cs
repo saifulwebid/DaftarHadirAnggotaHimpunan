@@ -1,4 +1,4 @@
-﻿namespace WinForms
+﻿namespace WinForms.Forms
 {
     partial class frmMain
     {
