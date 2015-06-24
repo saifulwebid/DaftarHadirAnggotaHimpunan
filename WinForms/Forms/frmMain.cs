@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using WinForms.Class;
+using System.Data.SQLite;
 
 namespace WinForms.Forms
 {
@@ -18,6 +19,29 @@ namespace WinForms.Forms
             InitializeComponent();
             dgvDataAnggota.DataSource = _daftarAnggota;
             dgvKehadiran.AutoGenerateColumns = false;
+
+            SQLiteConnection con = new SQLiteConnection("Data Source=Database/data.db");
+            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM anggota", con);
+
+            con.Open();
+            using (SQLiteDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    Anggota anggota = new Anggota();
+                    anggota.NomorAnggota = dr["NomorAnggota"].ToString();
+                    anggota.NomorMahasiswa = dr["NomorMahasiswa"].ToString();
+                    anggota.Kelas = dr["Kelas"].ToString();
+                    anggota.Nama = dr["Nama"].ToString();
+                    anggota.NomorHandphone = dr["NomorHandphone"].ToString();
+                    anggota.NamaBagus = dr["NamaBagus"].ToString();
+                    anggota.Departemen = dr["Departemen"].ToString();
+
+                    _daftarAnggota.Add(anggota);
+                }
+            }
+
+            con.Close();
         }
 
         private void btnAddAnggota_Click(object sender, EventArgs e)
