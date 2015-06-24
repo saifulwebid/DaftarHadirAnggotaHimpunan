@@ -25,7 +25,7 @@ namespace WinForms.Forms
         public frmMain()
         {
             InitializeComponent();
-            DaftarAnggota = SQLiteDatabase.GetAllAnggota();
+            DaftarAnggota = Anggota.GetAll();
             dgvKehadiran.AutoGenerateColumns = false;
         }
 
