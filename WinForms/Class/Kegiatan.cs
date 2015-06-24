@@ -17,6 +17,11 @@ namespace WinForms.Class
             Kehadiran = new BindingList<Kehadiran>();
         }
 
+        public static BindingList<Kegiatan> GetAll()
+        {
+            return SQLiteDatabase.GetAllKegiatan();
+        }
+
         public void PrepareEmptyKehadiran(BindingList<Anggota> listAnggota)
         {
             this.Kehadiran.Clear();
@@ -30,6 +35,11 @@ namespace WinForms.Class
 
                 this.Kehadiran.Add(kehadiran);
             }
+        }
+
+        public void PrepareKehadiranFromDatabase()
+        {
+            throw new NotImplementedException();
         }
 
         public void Save()

@@ -74,6 +74,31 @@ namespace WinForms.Class
             con.Close();
         }
 
+        public static BindingList<Kegiatan> GetAllKegiatan()
+        {
+            BindingList<Kegiatan> result = new BindingList<Kegiatan>();
+            con.Open();
+
+            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM kegiatan", con);
+            using (SQLiteDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    Kegiatan kegiatan = new Kegiatan();
+                    kegiatan.ID = Convert.ToInt32(dr["ID"]);
+                    kegiatan.Nama = dr["Nama"].ToString();
+                    kegiatan.JamMulai = Convert.ToDateTime(dr["JamMulai"]);
+                    kegiatan.JamSelesai = Convert.ToDateTime(dr["JamSelesai"]);
+                    kegiatan.PrepareKehadiranFromDatabase();
+
+                    result.Add(kegiatan);
+                }
+            }
+
+            con.Close();
+            return result;
+        }
+
         public static void SaveKegiatan(Kegiatan kegiatan)
         {
             con.Open();
