@@ -73,6 +73,12 @@
     <Compile Include="Forms\frmDaftarKegiatan.Designer.cs">
       <DependentUpon>frmDaftarKegiatan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmDaftarKehadiran.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDaftarKehadiran.Designer.cs">
+      <DependentUpon>frmDaftarKehadiran.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmDetilKegiatan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDaftarKegiatan.resx">
       <DependentUpon>frmDaftarKegiatan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDaftarKehadiran.resx">
+      <DependentUpon>frmDaftarKehadiran.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDetilKegiatan.resx">
       <DependentUpon>frmDetilKegiatan.cs</DependentUpon>

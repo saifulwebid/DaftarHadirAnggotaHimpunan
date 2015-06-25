@@ -46,7 +46,11 @@ namespace WinForms.Forms
             if (((DataGridView) sender).Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                throw new NotImplementedException();
+                Kegiatan kegiatan = ((Kegiatan)((DataGridView)sender).Rows[e.RowIndex].DataBoundItem);
+
+                frmDaftarKehadiran form = new frmDaftarKehadiran(kegiatan);
+                form.MdiParent = this.MdiParent;
+                form.Show();
             }
         }
 
