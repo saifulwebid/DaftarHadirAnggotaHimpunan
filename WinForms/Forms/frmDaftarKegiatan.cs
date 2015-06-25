@@ -60,5 +60,21 @@ namespace WinForms.Forms
                 daftarKegiatan.Add(form.kegiatan);
             }
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvKegiatan.SelectedRows.Count == 1)
+            {
+                Kegiatan kegiatan = (Kegiatan)dgvKegiatan.SelectedRows[0].DataBoundItem;
+                frmDetilKegiatan form = new frmDetilKegiatan(kegiatan);
+                form.ShowDialog();
+
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    daftarKegiatan = Kegiatan.GetAll();
+                    dgvKegiatan.DataSource = daftarKegiatan;
+                }
+            }
+        }
     }
 }

@@ -27,6 +27,10 @@ namespace WinForms.Forms
             InitializeComponent();
             this.kegiatan = kegiatan;
             this.Text = "Ubah Kegiatan";
+
+            txtNama.Text = kegiatan.Nama;
+            dtpMulai.Value = kegiatan.JamMulai;
+            dtpSelesai.Value = kegiatan.JamSelesai;
         }
 
         private void btnSimpan_Click(object sender, EventArgs e)

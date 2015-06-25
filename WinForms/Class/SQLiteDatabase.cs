@@ -192,7 +192,7 @@ namespace WinForms.Class
             if (Convert.ToInt32(cmd.ExecuteScalar()) == 1) // data ditemukan, lakukan perubahan
             {
                 command = "UPDATE kehadiran SET Status=@Status, JamDatang=@JamDatang, " +
-                          "JamPulang=@JamPulang WHERE Kegiatan=@Kegiatan AND NomorAnggota=@NomorAnggota";
+                          "JamPulang=@JamPulang WHERE Kegiatan=@Kegiatan AND Anggota=@Anggota";
             }
             else // data tidak ditemukan, buat data baru
             {
