@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtNama = new System.Windows.Forms.TextBox();
-            this.txtNpa = new System.Windows.Forms.TextBox();
-            this.dgvDataAnggota = new System.Windows.Forms.DataGridView();
-            this.btnAddAnggota = new System.Windows.Forms.Button();
             this.txtNamaKegiatan = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.dtpJamDatang = new System.Windows.Forms.DateTimePicker();
@@ -48,44 +44,9 @@
             this.daftarKegiatanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.keluarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDataAnggota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKehadiran)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtNama
-            // 
-            this.txtNama.Location = new System.Drawing.Point(141, 70);
-            this.txtNama.Name = "txtNama";
-            this.txtNama.Size = new System.Drawing.Size(179, 20);
-            this.txtNama.TabIndex = 0;
-            this.txtNama.Text = "Nama";
-            // 
-            // txtNpa
-            // 
-            this.txtNpa.Location = new System.Drawing.Point(141, 96);
-            this.txtNpa.Name = "txtNpa";
-            this.txtNpa.Size = new System.Drawing.Size(100, 20);
-            this.txtNpa.TabIndex = 1;
-            this.txtNpa.Text = "NPA";
-            // 
-            // dgvDataAnggota
-            // 
-            this.dgvDataAnggota.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDataAnggota.Location = new System.Drawing.Point(141, 128);
-            this.dgvDataAnggota.Name = "dgvDataAnggota";
-            this.dgvDataAnggota.Size = new System.Drawing.Size(507, 128);
-            this.dgvDataAnggota.TabIndex = 2;
-            // 
-            // btnAddAnggota
-            // 
-            this.btnAddAnggota.Location = new System.Drawing.Point(550, 262);
-            this.btnAddAnggota.Name = "btnAddAnggota";
-            this.btnAddAnggota.Size = new System.Drawing.Size(98, 23);
-            this.btnAddAnggota.TabIndex = 3;
-            this.btnAddAnggota.Text = "Add Anggota";
-            this.btnAddAnggota.UseVisualStyleBackColor = true;
-            this.btnAddAnggota.Click += new System.EventHandler(this.btnAddAnggota_Click);
             // 
             // txtNamaKegiatan
             // 
@@ -237,17 +198,12 @@
             this.Controls.Add(this.dtpJamDatang);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.txtNamaKegiatan);
-            this.Controls.Add(this.btnAddAnggota);
-            this.Controls.Add(this.dgvDataAnggota);
-            this.Controls.Add(this.txtNpa);
-            this.Controls.Add(this.txtNama);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Aplikasi Kehadiran Anggota Himpunan";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDataAnggota)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKehadiran)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -258,10 +214,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtNama;
-        private System.Windows.Forms.TextBox txtNpa;
-        private System.Windows.Forms.DataGridView dgvDataAnggota;
-        private System.Windows.Forms.Button btnAddAnggota;
         private System.Windows.Forms.TextBox txtNamaKegiatan;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.DateTimePicker dtpJamDatang;

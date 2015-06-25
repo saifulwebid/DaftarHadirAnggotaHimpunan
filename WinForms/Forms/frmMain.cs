@@ -16,7 +16,7 @@ namespace WinForms.Forms
             set
             {
                 _daftarAnggota = value;
-                dgvDataAnggota.DataSource = _daftarAnggota;
+                //dgvDataAnggota.DataSource = _daftarAnggota;
             }
         }
         private Kegiatan _kegiatan;
@@ -27,14 +27,6 @@ namespace WinForms.Forms
             InitializeComponent();
             DaftarAnggota = Anggota.GetAll();
             dgvKehadiran.AutoGenerateColumns = false;
-        }
-
-        private void btnAddAnggota_Click(object sender, EventArgs e)
-        {
-            foreach (Anggota anggota in _daftarAnggota)
-            {
-                anggota.Save();
-            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -170,7 +162,9 @@ namespace WinForms.Forms
 
         private void daftarAnggotaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            frmDaftarAnggota form = new frmDaftarAnggota();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void daftarKegiatanToolStripMenuItem_Click(object sender, EventArgs e)
