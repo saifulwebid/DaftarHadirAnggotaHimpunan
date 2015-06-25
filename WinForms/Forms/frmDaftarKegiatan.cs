@@ -49,5 +49,16 @@ namespace WinForms.Forms
                 throw new NotImplementedException();
             }
         }
+
+        private void btnTambah_Click(object sender, EventArgs e)
+        {
+            frmDetilKegiatan form = new frmDetilKegiatan();
+            form.ShowDialog();
+
+            if (form.DialogResult == DialogResult.OK)
+            {
+                daftarKegiatan.Add(form.kegiatan);
+            }
+        }
     }
 }
