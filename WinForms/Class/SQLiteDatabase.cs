@@ -10,11 +10,15 @@ namespace WinForms.Class
 {
     class SQLiteDatabase
     {
-        private static SQLiteConnection con = new SQLiteConnection("Data Source=Database/data.db");
+        private static SQLiteConnection CreateConnection()
+        {
+            return new SQLiteConnection("Data Source=Database/data.db");
+        }
 
         public static BindingList<Anggota> GetAllAnggota()
         {
             BindingList<Anggota> result = new BindingList<Anggota>();
+            SQLiteConnection con = CreateConnection();
             con.Open();
 
             SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM anggota", con);
@@ -35,12 +39,13 @@ namespace WinForms.Class
                 }
             }
 
-            con.Close();
+            con.Dispose();
             return result;
         }
 
         public static void SaveAnggota(Anggota anggota)
         {
+            SQLiteConnection con = CreateConnection();
             con.Open();
 
             string command = "SELECT COUNT(*) AS count FROM anggota WHERE NomorAnggota=@NomorAnggota";
@@ -71,12 +76,13 @@ namespace WinForms.Class
 
             cmd.ExecuteNonQuery();
 
-            con.Close();
+            con.Dispose();
         }
 
         public static BindingList<Kegiatan> GetAllKegiatan()
         {
             BindingList<Kegiatan> result = new BindingList<Kegiatan>();
+            SQLiteConnection con = CreateConnection();
             con.Open();
 
             SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM kegiatan", con);
@@ -95,12 +101,13 @@ namespace WinForms.Class
                 }
             }
 
-            con.Close();
+            con.Dispose();
             return result;
         }
 
         public static void SaveKegiatan(Kegiatan kegiatan)
         {
+            SQLiteConnection con = CreateConnection();
             con.Open();
 
             string command = "SELECT COUNT(*) AS count FROM kegiatan WHERE ID=@ID";
@@ -126,13 +133,14 @@ namespace WinForms.Class
 
             cmd.ExecuteNonQuery();
 
-            con.Close();
+            con.Dispose();
         }
 
         public static BindingList<Kehadiran> GetAllKehadiran(Kegiatan kegiatan)
         {
             BindingList<Kehadiran> result = new BindingList<Kehadiran>();
             BindingList<Anggota> anggota = GetAllAnggota();
+            SQLiteConnection con = CreateConnection();
             con.Open();
 
             SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM kehadiran WHERE Kegiatan=@Kegiatan", con);
@@ -152,12 +160,13 @@ namespace WinForms.Class
                 }
             }
 
-            con.Close();
+            con.Dispose();
             return result;
         }
 
         public static void SaveKehadiran(Kehadiran kehadiran)
         {
+            SQLiteConnection con = CreateConnection();
             con.Open();
 
             string command = "SELECT COUNT(*) AS count FROM kehadiran WHERE Kegiatan=@Kegiatan AND " +
@@ -186,7 +195,7 @@ namespace WinForms.Class
 
             cmd.ExecuteNonQuery();
 
-            con.Close();
+            con.Dispose();
         }
     }
 }
