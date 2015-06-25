@@ -136,6 +136,20 @@ namespace WinForms.Class
             con.Dispose();
         }
 
+        public static int GetNextIDOfKegiatan()
+        {
+            SQLiteConnection con = CreateConnection();
+            con.Open();
+
+            string command = "SELECT seq FROM sqlite_sequence WHERE name=\"kegiatan\"";
+            SQLiteCommand cmd = new SQLiteCommand(command, con);
+
+            int result = Convert.ToInt32(cmd.ExecuteScalar()) + 1;
+
+            con.Dispose();
+            return result;
+        }
+
         public static BindingList<Kehadiran> GetAllKehadiran(Kegiatan kegiatan)
         {
             BindingList<Kehadiran> result = new BindingList<Kehadiran>();

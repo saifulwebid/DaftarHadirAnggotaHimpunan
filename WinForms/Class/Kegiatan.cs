@@ -51,5 +51,10 @@ namespace WinForms.Class
                 kehadiran.Save();
             }
         }
+
+        public static int GetNextID()
+        {
+            return SQLiteDatabase.GetNextIDOfKegiatan();
+        }
     }
 }
