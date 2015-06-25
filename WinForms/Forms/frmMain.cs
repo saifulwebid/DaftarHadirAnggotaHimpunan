@@ -169,7 +169,9 @@ namespace WinForms.Forms
 
         private void daftarKegiatanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            frmDaftarKegiatan form = new frmDaftarKegiatan();
+            form.MdiParent = this;
+            form.Show();
         }
     }
 }
