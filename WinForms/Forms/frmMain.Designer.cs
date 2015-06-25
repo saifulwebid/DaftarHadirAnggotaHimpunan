@@ -38,14 +38,14 @@
             this.btnAddKegiatan = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnScan = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mstMain = new System.Windows.Forms.MenuStrip();
             this.aplikasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.daftarAnggotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.daftarKegiatanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.keluarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKehadiran)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.mstMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNamaKegiatan
@@ -136,15 +136,15 @@
             this.btnScan.UseVisualStyleBackColor = true;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
-            // menuStrip1
+            // mstMain
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mstMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aplikasiToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(664, 24);
-            this.menuStrip1.TabIndex = 15;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mstMain.Location = new System.Drawing.Point(0, 0);
+            this.mstMain.Name = "mstMain";
+            this.mstMain.Size = new System.Drawing.Size(664, 24);
+            this.mstMain.TabIndex = 15;
+            this.mstMain.Text = "menuStrip1";
             // 
             // aplikasiToolStripMenuItem
             // 
@@ -198,15 +198,15 @@
             this.Controls.Add(this.dtpJamDatang);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.txtNamaKegiatan);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.mstMain);
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.mstMain;
             this.Name = "frmMain";
             this.Text = "Aplikasi Kehadiran Anggota Himpunan";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvKehadiran)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.mstMain.ResumeLayout(false);
+            this.mstMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,7 +224,7 @@
         private System.Windows.Forms.Button btnAddKegiatan;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnScan;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mstMain;
         private System.Windows.Forms.ToolStripMenuItem aplikasiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem daftarAnggotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem daftarKegiatanToolStripMenuItem;
