@@ -162,5 +162,20 @@ namespace WinForms.Forms
             FrmScan.ShowDialog();
             return FrmScan.GetData;
         }
+
+        private void keluarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void daftarAnggotaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void daftarKegiatanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
