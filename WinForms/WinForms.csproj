@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WinForms</RootNamespace>
-    <AssemblyName>WinForms</AssemblyName>
+    <AssemblyName>AplikasiKehadiranAnggotaHimpunan</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>09eaee4d</NuGetPackageImportStamp>
