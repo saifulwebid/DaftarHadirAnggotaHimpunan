@@ -94,6 +94,7 @@
             this.MainMenuStrip = this.mstMain;
             this.Name = "frmMain";
             this.Text = "Aplikasi Kehadiran Anggota Himpunan";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mstMain.ResumeLayout(false);
             this.mstMain.PerformLayout();
             this.ResumeLayout(false);
