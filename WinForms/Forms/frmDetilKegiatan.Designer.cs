@@ -46,7 +46,7 @@
             // 
             // dtpMulai
             // 
-            this.dtpMulai.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            this.dtpMulai.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.dtpMulai.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMulai.Location = new System.Drawing.Point(12, 74);
             this.dtpMulai.Name = "dtpMulai";
@@ -55,7 +55,7 @@
             // 
             // dtpSelesai
             // 
-            this.dtpSelesai.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            this.dtpSelesai.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.dtpSelesai.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpSelesai.Location = new System.Drawing.Point(12, 123);
             this.dtpSelesai.Name = "dtpSelesai";
