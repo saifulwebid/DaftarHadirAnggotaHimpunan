@@ -129,96 +129,124 @@ namespace WinForms.Forms
 
         private void btnEkspor_Click(object sender, EventArgs e)
         {
-            FileInfo newFile = new FileInfo(@"D:\m\DaftarHadir" + DateTime.Now.ToString("ddMMyyssmmhh") + ".xlsx");
-            using (ExcelPackage package = new ExcelPackage(newFile))
+            if (sfdSave.ShowDialog() == DialogResult.OK)
             {
-                ExcelWorkbook workBook = package.Workbook;
-                ExcelWorksheet ws1 = workBook.Worksheets.Add("1");
-                using (var rng = ws1.Cells["B4:B7"])
+                FileInfo newFile = new FileInfo(sfdSave.FileName);
+
+                /* Jika file yang dimaksud sudah ada, maka hapus file tersebut.
+                 * Hal ini untuk memastikan bahwa kita akan selalu membuat file baru.
+                 */
+                try
                 {
-
-                    rng.Style.Font.Bold = true;
-
-                    rng.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                    rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    rng.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(237, 237, 237));
-                    rng.Style.Font.Size = 12;
-
+                    if (newFile.Exists)
+                    {
+                        newFile.Delete();
+                        newFile = new FileInfo(sfdSave.FileName);
+                    }
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show("File sedang dibuka oleh program lain.\n" +
+                                    "Silakan coba simpan ke file yang lain.", "Error", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Exclamation);
+                    return;
                 }
 
-                ws1.View.FreezePanes(9, 4);
-
-                ws1.Cells["B4"].Value = "ID";
-                ws1.Cells["B5"].Value = "Nama Kegiatan";
-                ws1.Cells["B5"].AutoFitColumns();
-                ws1.Cells["B6"].Value = "Jam Mulai";
-                ws1.Cells["B7"].Value = "Jam Selesai";
-
-                ws1.Column(2).Width = 17;
-
-                ws1.Cells["C4"].Value = kegiatan.ID;
-                ws1.Cells["C5"].Value = kegiatan.Nama;
-                ws1.Cells["C6"].Value = kegiatan.JamMulai;
-                ws1.Cells["C6"].Style.Numberformat.Format = "dd-mm-yyyy hh:mm:ss";
-                ws1.Cells["C7"].Value = kegiatan.JamSelesai;
-                ws1.Cells["C7"].Style.Numberformat.Format = "dd-mm-yyyy hh:mm:ss";
-
-                ws1.Column(3).Width = 25;
-                using (var rng = ws1.Cells["D8:L8"])
+                using (ExcelPackage package = new ExcelPackage(newFile))
                 {
+                    ExcelWorkbook workBook = package.Workbook;
+                    ExcelWorksheet ws1 = workBook.Worksheets.Add("Report");
 
-                    rng.Style.Font.Bold = true;
+                    /* Header info kegiatan */
+                    using (var rng = ws1.Cells["A1:A3"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                        rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        rng.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(237, 237, 237));
+                        rng.Style.Font.Size = 12;
+                    }
+                    ws1.Cells["A1"].Value = "Nama Kegiatan";
+                    ws1.Cells["A2"].Value = "Jam Mulai";
+                    ws1.Cells["A3"].Value = "Jam Selesai";
+                    ws1.Column(1).Width = 17;
 
+                    /* Detil info kegiatan */
+                    ws1.Cells["B1"].Value = kegiatan.Nama;
+                    ws1.Cells["B2"].Value = kegiatan.JamMulai;
+                    ws1.Cells["B2"].Style.Numberformat.Format = "dd-mm-yyyy hh:mm:ss";
+                    ws1.Cells["B3"].Value = kegiatan.JamSelesai;
+                    ws1.Cells["B3"].Style.Numberformat.Format = "dd-mm-yyyy hh:mm:ss";
+                    ws1.Column(2).Width = 25;
 
-                    rng.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                    rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    rng.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(237, 237, 237));
-                    rng.Style.Font.Size = 12;
+                    ws1.View.FreezePanes(4, 3);
 
+                    /* Header list kehadiran */
+                    using (var rng = ws1.Cells["C4:K4"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                        rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                        rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        rng.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(237, 237, 237));
+                        rng.Style.Font.Size = 12;
+                    }
+                    ws1.Cells["C4"].Value = "NPA";
+                    ws1.Cells["D4"].Value = "NIM";
+                    ws1.Cells["E4"].Value = "Nama";
+                    ws1.Cells["F4"].Value = "Nama Bagus";
+                    ws1.Cells["G4"].Value = "Kelas";
+                    ws1.Cells["H4"].Value = "Jam Datang";
+                    ws1.Cells["I4"].Value = "Jam Pulang";
+                    ws1.Cells["J4"].Value = "Status";
+
+                    ws1.Column(3).Width = 14;
+                    ws1.Column(4).Width = 14;
+                    ws1.Column(5).Width = 30;
+                    ws1.Column(6).Width = 30;
+                    ws1.Column(7).Width = 10;
+                    ws1.Column(8).Width = 25;
+                    ws1.Column(9).Width = 25;
+                    ws1.Column(10).Width = 17;
+
+                    /* Detil list kehadiran */
+                    int row = 5;
+                    foreach (var kehadiran in kegiatan.DaftarKehadiran)
+                    {
+                        ws1.Cells[row, 3].Value = kehadiran.Anggota.NomorAnggota;
+                        ws1.Cells[row, 4].Value = kehadiran.Anggota.NomorMahasiswa;
+                        ws1.Cells[row, 5].Value = kehadiran.Anggota.Nama;
+                        ws1.Cells[row, 6].Value = kehadiran.Anggota.NamaBagus;
+                        ws1.Cells[row, 7].Value = kehadiran.Anggota.Kelas;
+                        if (!kehadiran.JamDatang.Equals(DateTime.MinValue))
+                        {
+                            ws1.Cells[row, 8].Value = kehadiran.JamDatang;
+                            ws1.Cells[row, 8].Style.Numberformat.Format = "dd-mm-yyyy hh:mm:ss";
+                        }
+                        if (!kehadiran.JamPulang.Equals(DateTime.MinValue))
+                        {
+                            ws1.Cells[row, 9].Value = kehadiran.JamPulang;
+                            ws1.Cells[row, 9].Style.Numberformat.Format = "dd-mm-yyyy hh:mm:ss";
+                        }
+                        ws1.Cells[row, 10].Value = kehadiran.Status;
+
+                        row++;
+                    }
+
+                    try
+                    {
+                        package.Save();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                    MessageBox.Show("Daftar kehadiran berhasil di-export.",
+                        "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                ws1.Cells["D8"].Value = "Nomor Anggota";
-                ws1.Cells["E8"].Value = "Nomor Mahasiswa";
-                ws1.Cells["F8"].Value = "Nama";
-                ws1.Cells["G8"].Value = "Nama Bagus";
-                ws1.Cells["H8"].Value = "Kelas";
-                ws1.Cells["I8"].Value = "Kontak";
-                ws1.Cells["J8"].Value = "Jam Datang";
-                ws1.Cells["K8"].Value = "Jam Pulang";
-                ws1.Cells["L8"].Value = "Status";
-
-                ws1.Column(4).Width = 20;
-                ws1.Column(5).Width = 20;
-                ws1.Column(6).Width = 30;
-                ws1.Column(7).Width = 30;
-                ws1.Column(8).Width = 10;
-                ws1.Column(9).Width = 20;
-                ws1.Column(10).Width = 25;
-                ws1.Column(11).Width = 25;
-                ws1.Column(12).Width = 17;
-                int row = 9;
-                foreach (var kehadiran in kegiatan.DaftarKehadiran)
-                {
-                    ws1.Cells[row, 4].Value = kehadiran.Anggota.NomorAnggota;
-                    ws1.Cells[row, 5].Value = kehadiran.Anggota.NomorMahasiswa;
-                    ws1.Cells[row, 6].Value = kehadiran.Anggota.Nama;
-                    ws1.Cells[row, 7].Value = kehadiran.Anggota.NamaBagus;
-                    ws1.Cells[row, 8].Value = kehadiran.Anggota.Kelas;
-                    ws1.Cells[row, 9].Value = kehadiran.Anggota.NomorHandphone;
-                    ws1.Cells[row, 10].Value = kehadiran.JamDatang;
-                    ws1.Cells[row, 10].Style.Numberformat.Format = "dd-mm-yyyy hh:mm:ss";
-                    ws1.Cells[row, 11].Value = kehadiran.JamPulang;
-                    ws1.Cells[row, 11].Style.Numberformat.Format = "dd-mm-yyyy hh:mm:ss";
-                    ws1.Cells[row, 12].Value = kehadiran.Status;
-
-                    row++;
-                }
-
-                package.Save();
             }
-            newFile = new FileInfo("D:\\");
         }
     }
 }
