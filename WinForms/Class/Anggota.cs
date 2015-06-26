@@ -39,10 +39,10 @@ namespace WinForms.Class
                         }
                         else
                         {
-                            x.Status = JenisKehadiran.Telat;
+                            x.Status = JenisKehadiran.Terlambat;
                         }
                     }
-                    else if (x.Status == JenisKehadiran.Hadir || x.Status == JenisKehadiran.Telat)
+                    else if (x.Status == JenisKehadiran.Hadir || x.Status == JenisKehadiran.Terlambat)
                     {
                         x.JamPulang = DateTime.Now;
                     }
