@@ -33,6 +33,7 @@
             this.btnAbsen = new System.Windows.Forms.Button();
             this.txtNPA = new System.Windows.Forms.TextBox();
             this.btnScan = new System.Windows.Forms.Button();
+            this.sfdSave = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKehadiran)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,6 +83,10 @@
             this.btnScan.UseVisualStyleBackColor = true;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
+            // sfdSave
+            // 
+            this.sfdSave.Filter = "Microsoft Excel 2010 format (*.xlsx)|*.xlsx";
+            // 
             // frmDaftarKehadiran
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -107,5 +112,6 @@
         private System.Windows.Forms.Button btnAbsen;
         private System.Windows.Forms.TextBox txtNPA;
         private System.Windows.Forms.Button btnScan;
+        private System.Windows.Forms.SaveFileDialog sfdSave;
     }
 }
