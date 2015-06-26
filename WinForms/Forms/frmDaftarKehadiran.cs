@@ -81,13 +81,17 @@ namespace WinForms.Forms
 
         private void btnAbsen_Click(object sender, EventArgs e)
         {
-            foreach (Anggota anggota in Anggota.GetAll())
+            Anggota anggota = Anggota.GetAll().SingleOrDefault(x => x.NomorAnggota.Equals(txtNPA.Text));
+            if (anggota != null)
             {
-                if (anggota.NomorAnggota.Equals(txtNPA.Text))
-                {
-                    anggota.ProsesKehadiran(this.kegiatan);
-                    return;
-                }
+                anggota.ProsesKehadiran(this.kegiatan);
+                txtNPA.Text = "";
+                txtNPA.Focus();
+            }
+            else
+            {
+                MessageBox.Show("Anggota tidak ditemukan.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
             }
         }
 
