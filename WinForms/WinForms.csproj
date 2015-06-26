@@ -26,7 +26,7 @@
     <SupportUrl>https://github.com/saifulwebid/DaftarHadirAnggotaHimpunan</SupportUrl>
     <ErrorReportUrl>https://github.com/saifulwebid/DaftarHadirAnggotaHimpunan/issues</ErrorReportUrl>
     <ProductName>Aplikasi Kehadiran Anggota Himpunan</ProductName>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
