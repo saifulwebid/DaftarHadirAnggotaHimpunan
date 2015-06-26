@@ -147,7 +147,7 @@ namespace WinForms.Forms
                         newFile = new FileInfo(sfdSave.FileName);
                     }
                 }
-                catch (IOException ex)
+                catch (IOException)
                 {
                     MessageBox.Show("File sedang dibuka oleh program lain.\n" +
                                     "Silakan coba simpan ke file yang lain.", "Error", MessageBoxButtons.OK,
