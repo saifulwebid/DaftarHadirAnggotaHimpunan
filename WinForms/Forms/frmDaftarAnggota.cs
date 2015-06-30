@@ -41,9 +41,10 @@ namespace WinForms.Forms
         }
 
         Anggota anggota = new Anggota();
+        
         private void btnImport_Click(object sender, EventArgs e)
         {
-            if (tbFile.Text == null)
+            if (tbFile.Text == "")
             {
                 MessageBox.Show("Masukkan alamat file!!!");
                 /*Jika tbFIle belum terisi*/
@@ -59,15 +60,22 @@ namespace WinForms.Forms
                         {
                             ExcelWorksheet worksheet = workBook.Worksheets[1];
 
-                            for (int i = 5; i <= worksheet.Dimension.End.Row; i++)
+                           
+                            for (int i = 5; i < worksheet.Dimension.End.Row - 1; i++)
                             {
-                                anggota.NomorAnggota = worksheet.Cells[i, 3].Text;
-                                anggota.NomorMahasiswa = worksheet.Cells[i, 4].Text;
-                                anggota.Nama = worksheet.Cells[i, 5].Text;
-                                anggota.NamaBagus = worksheet.Cells[i, 6].Text;
-                                anggota.Kelas = worksheet.Cells[i, 7].Text;
-                                anggota.Departemen = worksheet.Cells[i, 8].Text;
-                                anggota.NomorHandphone = worksheet.Cells[i, 9].Text;
+                                
+
+                                anggota.NomorAnggota = worksheet.Cells[i, 3].Value.ToString();
+                                anggota.NomorMahasiswa = worksheet.Cells[i, 4].Value.ToString();
+                                anggota.Nama = worksheet.Cells[i, 5].Value.ToString();
+                                anggota.NamaBagus = worksheet.Cells[i, 6].Value.ToString();
+                                anggota.Kelas = worksheet.Cells[i, 7].Value.ToString();
+                                anggota.Departemen = worksheet.Cells[i, 8].Value.ToString();
+                                anggota.NomorHandphone = worksheet.Cells[i, 9].Value.ToString();
+
+                                MessageBox.Show("" + anggota.Nama);
+                                //massage box untuk membuktikan bahwa sebenarnya data di excel sudah terbaca
+                                daftarAnggota.Add(anggota);
                             }
                                 try
                                 {

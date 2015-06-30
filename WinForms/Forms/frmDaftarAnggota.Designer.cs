@@ -1,4 +1,4 @@
-﻿amespace WinForms.Forms
+﻿namespace WinForms.Forms
 {
     partial class frmDaftarAnggota
     {
